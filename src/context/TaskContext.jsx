@@ -1,7 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react"
 
+// creo el contexto
 const TaskContext = createContext()
 
+// este componente envuelve toda la app, por eso ({children})
 export const TaskProvider = ({ children }) => {
     // se cargan las tareas guardadas desde el local storage.
     // en caso de q no hayan tareas, se empieza con un array vacío.
@@ -11,16 +13,22 @@ export const TaskProvider = ({ children }) => {
         return storedTasks ? JSON.parse(storedTasks) : []
     })
 
+    // search guardará el texto del buscador
     const [search, setSearch] = useState("")
+
+    // darkMode guardará si el modo oscuro está activo, es decir, un boolean
     const [darkMode, setDarkMode] = useState(() => {
+        // lo recupero desde el localStorage para mantener también
+        // el tema cuando recargue la página.
         return localStorage.getItem("darkMode") === "true"
     })
 
-    // cada vez q cambien las tareas, se guarda la 'nueva version'.
+    // cada vez q cambian las tareas, se guarda la nueva version.
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks))
     }, [tasks])
 
+    // se guarda también el modo
     useEffect(() => {
         localStorage.setItem("darkMode", darkMode)
     }, [darkMode])
@@ -57,4 +65,5 @@ export const TaskProvider = ({ children }) => {
     )
 }
 
+// atajo para usar el contexto y quede más limpio
 export const useTasks = () => useContext(TaskContext)

@@ -6,17 +6,21 @@ import SearchBar from "./components/SearchBar"
 import ThemeToggle from "./components/ThemeToggle"
 
 const App = () => {
+  // lee darkMode del contexto, si está activado o no
   const { darkMode } = useTasks()
 
+  // si darkMode = true, añade clase dark al html,
+  // si darkMode = false, quita el dark al html
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode)
   }, [darkMode])
 
+  // todo el contenido visual
   return (
     <div className="min-h-screen p-6 bg-pink-100 dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-[85%] mx-auto mb-20">
-        
-          <h1 className="text-6xl font-bold mt-6 mb-10"><span className="bg-gradient-to-r from-pink-800 to-pink-500 bg-clip-text text-transparent">Gestor de Tareas</span></h1>
+
+        <h1 className="text-6xl font-bold mt-6 mb-10"><span className="bg-gradient-to-r from-pink-800 to-pink-500 bg-clip-text text-transparent">Gestor de Tareas</span></h1>
 
         <TaskForm />
 
