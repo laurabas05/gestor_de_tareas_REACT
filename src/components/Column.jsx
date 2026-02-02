@@ -12,8 +12,9 @@ const Column = ({ title, status }) => {
 
     // devuelve la columna dibujada
     return (
-        <div onDrop={handleDrop} onDragOver={(e) => e.preventDefault()} className="bg-gray-200 dark:bg-gray-800 p-4 rounded-xl w-full">
-            <h3 className="font-bold mb-3">{title}</h3>
+        <div onDrop={handleDrop} onDragOver={(e) => e.preventDefault()} className="bg-pink-200 dark:bg-gray-800 p-4 rounded-xl w-full shadow-lg">
+            <h3 className="font-bold text-[18px]">{title}</h3>
+            <hr class="my-2 h-0.5 border-t-0 bg-pink-600/50" />
 
             {tasks
                 .filter(t => t.status === status)

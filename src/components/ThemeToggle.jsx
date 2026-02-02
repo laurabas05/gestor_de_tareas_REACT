@@ -6,9 +6,9 @@ const ThemeToggle = () => {
     return (
         <button
             onClick={() => setDarkMode(!darkMode)}
-            className="mb-4 px-3 py-1 rounded bg-gray-300 dark:bg-gray-700"
+            className="mb-4 px-3 py-1 rounded-full bg-pink-600"
         >
-            {darkMode ? "☀ Claro" : "🌙 Oscuro"}
+            {darkMode ? "☀️" : "🌙"}
         </button>
     )
 }

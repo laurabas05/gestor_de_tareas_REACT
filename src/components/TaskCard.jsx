@@ -15,26 +15,29 @@ const TaskCard = ({ task }) => {
     }
 
     return (
-        <div draggable onDragStart={handleDragStart} className={`bg-gray-100 dark:bg-gray-700 p-3 mb-3 rounded border-l-4 ${colors[task.priority]}`}>
+        <div draggable onDragStart={handleDragStart} className={`bg-pink-100 dark:bg-gray-700 p-3 mb-3 rounded border-l-4 ${colors[task.priority]}`}>
             <h4 className="font-semibold">{task.title}</h4>
             <p className="text-sm opacity-80">{task.description}</p>
 
-            <div className="lex justify-between mt-2">
+            <div className="justify-between mt-2">
                 <span className="text-xs">Prioridad: {task.priority}</span>
-                <div className="space-x-1">
-                    {task.status !== "todo" && (
-                        <button onClick={() => moveTask(task.id, "todo")}>⬅</button>
-                    )}
+                <div className="space-x-2 text-right">
+                        {task.status !== "todo" && (
+                            <button onClick={() => moveTask(task.id, "todo")}
+                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">⬅️</button>
+                        )}
 
-                    {task.status === "todo" && (
-                        <button onClick={() => moveTask(task.id, "progress")}>➡</button>
-                    )}
+                        {task.status === "todo" && (
+                            <button onClick={() => moveTask(task.id, "progress")}
+                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">➡️</button>
+                        )}
 
-                    {task.status === "progress" && (
-                        <button onClick={() => moveTask(task.id, "done")}>✔</button>
-                    )}
-
-                    <button onClick={() => deleteTask(task.id)}>🗑</button>
+                        {task.status === "progress" && (
+                            <button onClick={() => moveTask(task.id, "done")}
+                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">✅</button>
+                        )}
+                        <button onClick={() => deleteTask(task.id)}
+                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">Eliminar</button>
                 </div>
             </div>
         </div>

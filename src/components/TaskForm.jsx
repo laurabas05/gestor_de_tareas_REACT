@@ -36,7 +36,7 @@ const TaskForm = () => {
                 placeholder="Título"
                 value={values.title}
                 onChange={handleChange}
-                className="w-full mb-2 p-2 rounded border dark:bg-gray-700"
+                className="w-full mb-2 p-2 rounded border dark:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-pink-600 dark:border-gray-500"
                 required
             />
 
@@ -45,21 +45,21 @@ const TaskForm = () => {
                 placeholder="Descripción"
                 value={values.description}
                 onChange={handleChange}
-                className="w-full mb-2 p-2 rounded border dark:bg-gray-700 resize-none"
+                className="w-full mb-2 p-2 rounded border dark:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-pink-600 dark:border-gray-500 resize-none"
             />
 
             <select
                 name="priority"
                 value={values.priority}
                 onChange={handleChange}
-                className="w-full mb-2 p-2 rounded border dark:bg-gray-700"
+                className="w-full mb-2 p-2 rounded border dark:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-pink-600 dark:border-gray-500"
             >
                 <option>Alta</option>
                 <option>Media</option>
                 <option>Baja</option>
             </select>
 
-            <button className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Añadir tarea</button>
+            <button className="w-full bg-pink-600 text-white mt-4 py-2 rounded hover:bg-pink-700">Añadir tarea</button>
         </form>
     )
 }

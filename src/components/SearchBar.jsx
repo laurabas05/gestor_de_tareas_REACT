@@ -8,7 +8,7 @@ const SearchBar = () => {
             placeholder="Buscar tarea..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full mb-4 p-2 rounded border dark:bg-gray-700"
+            className="w-full mb-1 p-2 rounded border dark:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-pink-600 dark:border-gray-500"
         />
     )
 }
