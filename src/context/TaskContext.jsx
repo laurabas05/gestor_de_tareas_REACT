@@ -11,10 +11,19 @@ export const TaskProvider = ({ children }) => {
         return storedTasks ? JSON.parse(storedTasks) : []
     })
 
+    const [search, setSearch] = useState("")
+    const [darkMode, setDarkMode] = useState(() => {
+        return localStorage.getItem("darkMode") === "true"
+    })
+
     // cada vez q cambien las tareas, se guarda la 'nueva version'.
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks))
     }, [tasks])
+
+    useEffect(() => {
+        localStorage.setItem("darkMode", darkMode)
+    }, [darkMode])
 
     // añadimos una tarea haciendo copia del array.
     // lo q hace exactamente es coger la lista q ya tenemos,
@@ -42,7 +51,7 @@ export const TaskProvider = ({ children }) => {
 
     // aquí repartimos lo que los demás componentes queremos que usen.
     return (
-        <TaskContext.Provider value={{ tasks, addTask, deleteTask, moveTask }}>
+        <TaskContext.Provider value={{ tasks, addTask, deleteTask, moveTask, search, setSearch, darkMode, setDarkMode }}>
             {children}
         </TaskContext.Provider>
     )

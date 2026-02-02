@@ -10,14 +10,17 @@ const TaskCard = ({ task }) => {
     // se reciben las acciones
     const { deleteTask, moveTask } = useTasks()
 
+    const handleDragStart = (e) => {
+        e.dataTransfer.setData("taskId", task.id)
+    }
+
     return (
-        <div className={`bg-gray-100 dark:bg-gray-700 p-3 mb-3 rounded border-l-4 ${colors[task.priority]}`}>
+        <div draggable onDragStart={handleDragStart} className={`bg-gray-100 dark:bg-gray-700 p-3 mb-3 rounded border-l-4 ${colors[task.priority]}`}>
             <h4 className="font-semibold">{task.title}</h4>
             <p className="text-sm opacity-80">{task.description}</p>
-            <span>Prioridad: {task.priority}</span>
 
             <div className="lex justify-between mt-2">
-                <span className="text-xs">{task.priority}</span>
+                <span className="text-xs">Prioridad: {task.priority}</span>
                 <div className="space-x-1">
                     {task.status !== "todo" && (
                         <button onClick={() => moveTask(task.id, "todo")}>⬅</button>
