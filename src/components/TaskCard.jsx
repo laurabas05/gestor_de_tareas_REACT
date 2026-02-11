@@ -24,6 +24,10 @@ const TaskCard = ({ task }) => {
         <div draggable onDragStart={handleDragStart} className={`bg-pink-100 dark:bg-gray-700 p-3 mb-3 rounded border-l-4 ${colors[task.priority]}`}>
             <h4 className="font-semibold">{task.title}</h4>
             <p className="text-sm opacity-80">{task.description}</p>
+            <div className="flex items-center gap-2 mt-4 text-xs text-gray-500 italic">
+                <img src={task.authorPicture} className="w-5 h-5 rounded-full" />
+                <span>Creada por: {task.author}</span>
+            </div>
 
             <div className="justify-between mt-2">
                 <span className="text-xs">Prioridad: {task.priority}</span>

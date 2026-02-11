@@ -1,10 +1,14 @@
 import { useForm } from "../hooks/useForm"
 import { useTasks } from "../context/TaskContext"
+import { useAuth } from "../context/AuthContext"
 
 const TaskForm = () => {
     // sacamos 'addTask' del contexto, que es
     // lo único que necesitaremos
     const { addTask } = useTasks()
+    
+    // obtenemos el usuario logueado
+    const { user } = useAuth()
 
     // usamos el custom hook. inicializamos el form y
     // reunimos todos los inputs en un solo objeto 
@@ -22,7 +26,9 @@ const TaskForm = () => {
         const newTask = {
             id: Date.now(), // id unico (servirá para borrar o mover tareas)
             ...values, // copia título, descripción y prioridad
-            status: "todo" // por defecto se añade en estado 'pendientes'
+            status: "todo", // por defecto se añade en estado 'pendientes'
+            author: user.name, // el usuario q la ha creado
+            authorPicture: user.picture,
         }
 
         addTask(newTask) // manda la tarea al contexto
