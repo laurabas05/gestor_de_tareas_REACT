@@ -9,11 +9,16 @@ import Header from "./components/Header"
 import googleOneTap from "google-one-tap"
 
 const App = () => {
+  // se extrae el estado user (para saber si hay alguien logueado)
+  // y la funcion de login del contexto
   const { user, login } = useAuth()
 
+  // se ejecuta al cargar la web para q aparezca la interfaz de google
   useEffect(() => {
+    // si no hay user logeado, le pide el inicio de sesion
     if (!user) {
       googleOneTap({ client_id: "370998042099-oqk1snni2bvvnhr1517p9if58e28fej7.apps.googleusercontent.com" }, (response) => {
+        // cuando google devuelve el token JWT, se lo pasa a la funcion login
         login(response)
       })
     }
@@ -38,11 +43,10 @@ const App = () => {
               Gestor de Tareas
             </span>
           </h1>
-          {/* El Header siempre se muestra (si no hay user, el componente Header debe manejar su estado vacío) [cite: 22] */}
           <Header />
         </div>
 
-        {/* PROTECCIÓN DE RUTAS: Solo mostramos el contenido si hay usuario  */}
+        {/* proteccion d rutas: solo mostramos el contenido si hay usuario logueado */}
         {user ? (
           <>
             <TaskForm />
@@ -59,11 +63,11 @@ const App = () => {
             </div>
           </>
         ) : (
-          /* Mensaje invitando a iniciar sesión si no está identificado  */
+          /* mensaje por si el usuario no esta logeado */
           <div className="bg-white dark:bg-gray-800 p-10 rounded-xl shadow text-center mt-10">
-            <h2 className="text-2xl font-bold mb-2">Acceso Restringido</h2>
+            <h2 className="text-2xl font-bold mb-2">Acceso Denegado</h2>
             <p className="text-stone-600 dark:text-stone-400">
-              Por favor, utiliza la ventana de Google para iniciar sesión y acceder a tu tablero de tareas.
+              Utiliza la ventana de Google para iniciar sesión y acceder al gestor de tareas.
             </p>
           </div>
         )}
