@@ -1,11 +1,10 @@
 import { useState } from "react"
 import { useAuth } from "../context/AuthContext"
+import ThemeToggle from "./ThemeToggle"
+import { MdLogout } from "react-icons/md" // para el iconito de cerrar sesion
 
 const Header = () => {
     const { user, logout } = useAuth()
-
-    // estado para controlar la visibilidad del desplegable
-    const [isOpen, setIsOpen] = useState(false)
 
     // se comprueba si el usuario esta logueado o no para
     // que el componente sepa si mostrar el contenido o no.
@@ -13,10 +12,12 @@ const Header = () => {
 
     return (
         <header className="flex justify-end items-center p-4 relative">
-            <div className="relative">
+            <div className="flex">
+                <button className="flex">
+                    <ThemeToggle />
+                </button>
                 <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="flex items-center gap-3 bg-white dark:bg-gray-800 p-2 rounded-full shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700"
+                    className="flex items-center gap-3 bg-white dark:bg-gray-800 p-2 pr-4 rounded-full shadow-sm hover:shadow-md border border-gray-200 dark:border-gray-700 mx-2"
                     >
                     <img
                         src={user.picture}
@@ -26,24 +27,13 @@ const Header = () => {
                     <span className="font-medium text-sm hidden sm:block">
                         {user.name}
                     </span>
-                    <svg className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                    </svg>
                 </button>
-
-                {isOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 z-[100]">
-                        <button
-                            onClick={() => {
-                                logout();
-                                setIsOpen(false);
-                            }}
-                            className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"
-                        >
-                            Cerrar Sesión
-                        </button>
-                    </div>
-                )}
+                <button onClick={() => {
+                    logout();
+                    }} 
+                    className="flex items-center bg-red-300 dark:bg-red-800 p-2 px-3 rounded-full shadow-sm hover:shadow-md border border-red-200 dark:border-red-500 bg-opacity-30 dark:bg-opacity-30">
+                    <MdLogout size={24} color="#ff4d4d" />
+                </button>
             </div>
         </header>
     )

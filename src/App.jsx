@@ -71,10 +71,6 @@ const App = () => {
             </p>
           </div>
         )}
-
-        <div className="fixed bottom-4 right-5 z-50">
-          <ThemeToggle />
-        </div>
       </div>
     </div>
   )
