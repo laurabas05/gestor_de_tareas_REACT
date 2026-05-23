@@ -38,11 +38,6 @@ const App = () => {
     <div className="min-h-screen p-6 bg-pink-100 dark:bg-gray-900 text-black dark:text-white">
       <div className="max-w-[85%] mx-auto mb-20">
         <div className="flex">
-          <h1 className="flex-1 text-6xl font-bold mt-6 mb-10">
-            <span className="bg-gradient-to-r from-pink-800 to-pink-500 bg-clip-text text-transparent">
-              Gestor de Tareas
-            </span>
-          </h1>
           <Header />
         </div>
 
@@ -63,12 +58,45 @@ const App = () => {
             </div>
           </>
         ) : (
-          /* mensaje por si el usuario no esta logeado */
-          <div className="bg-white dark:bg-gray-800 p-10 rounded-xl shadow text-center mt-10">
-            <h2 className="text-2xl font-bold mb-2">Acceso Denegado</h2>
-            <p className="text-stone-600 dark:text-stone-400">
-              Utiliza la ventana de Google para iniciar sesión y acceder al gestor de tareas.
-            </p>
+          /* pantalla inicial por si el usuario no esta logeado */
+          <div className="fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(244,114,182,0.22)_0%,transparent_40%),radial-gradient(circle_at_80%_10%,rgba(236,72,153,0.25)_0%,transparent_42%),radial-gradient(circle_at_70%_80%,rgba(217,70,239,0.2)_0%,transparent_45%)]" />
+            <div className="absolute -top-24 right-0 h-80 w-80 rounded-full bg-pink-400/20 blur-3xl animate-pulse" />
+            <div className="absolute -bottom-24 left-0 h-80 w-80 rounded-full bg-fuchsia-400/20 blur-3xl animate-pulse" />
+
+            <div className="relative z-10 w-full text-center px-4">
+              <p className="mb-4 text-xs md:text-sm font-bold uppercase tracking-[0.22em] text-pink-700 dark:text-pink-300">
+                Laura Barrero Sánchez - 2º DAW
+              </p>
+              <h2 className="text-5xl md:text-7xl font-black leading-tight mb-4">
+                <span className="bg-gradient-to-r from-pink-700 via-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
+                  Gestor de Tareas
+                </span>
+              </h2>
+              <p className="text-stone-700 dark:text-stone-300 text-lg md:text-2xl mb-8 max-w-2xl mx-auto">
+                Organiza tu día, mantiene foco y completa tareas sin fricción.
+              </p>
+
+              <button
+                type="button"
+                onClick={() =>
+                  googleOneTap(
+                    { client_id: "370998042099-oqk1snni2bvvnhr1517p9if58e28fej7.apps.googleusercontent.com" },
+                    (response) => login(response)
+                  )
+                }
+                className="group inline-flex items-center gap-3 rounded-full bg-black text-white dark:bg-white dark:text-black px-7 py-3.5 text-base md:text-lg font-bold shadow-xl hover:scale-[1.02] active:scale-100 transition"
+              >
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white text-black dark:bg-black dark:text-white text-sm font-extrabold">
+                  G
+                </span>
+                Continuar con Google
+              </button>
+
+              <p className="mt-5 text-sm text-stone-600 dark:text-stone-400">
+                Si no aparece el pop-up, pulsa el botón.
+              </p>
+            </div>
           </div>
         )}
       </div>
