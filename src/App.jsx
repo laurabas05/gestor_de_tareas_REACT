@@ -6,22 +6,40 @@ import SearchBar from "./components/SearchBar"
 import ThemeToggle from "./components/ThemeToggle"
 import { useAuth } from "./context/AuthContext"
 import Header from "./components/Header"
-import googleOneTap from "google-one-tap"
 
 const App = () => {
   // se extrae el estado user (para saber si hay alguien logueado)
   // y la funcion de login del contexto
   const { user, login } = useAuth()
+  // id del cliente oauth de google
+  const googleClientId = "370998042099-oqk1snni2bvvnhr1517p9if58e28fej7.apps.googleusercontent.com"
+
+  // esta funcion solo lanza el one-tap
+  const promptOneTap = () => {
+    // si la api de google aun no esta lista, no hace nada
+    if (!window.google?.accounts?.id) return
+    window.google.accounts.id.prompt()
+  }
 
   // se ejecuta al cargar la web para q aparezca la interfaz de google
   useEffect(() => {
     // si no hay user logeado, le pide el inicio de sesion
-    if (!user) {
-      googleOneTap({ client_id: "370998042099-oqk1snni2bvvnhr1517p9if58e28fej7.apps.googleusercontent.com" }, (response) => {
+    if (user) return
+
+    // si la api de google no esta lista, no hace nada
+    if (!window.google?.accounts?.id) return
+
+    // configuro One-Tap con el id del cliente y la funcion callback que se ejecuta al iniciar sesion
+    window.google.accounts.id.initialize({
+      client_id: googleClientId,
+      callback: (response) => {
         // cuando google devuelve el token JWT, se lo pasa a la funcion login
         login(response)
-      })
-    }
+      },
+    })
+
+    // muestra el One-Tap
+    promptOneTap()
   }, [user, login])
 
   // lee darkMode del contexto, si está activado o no
@@ -58,7 +76,7 @@ const App = () => {
             </div>
           </>
         ) : (
-          /* pantalla inicial por si el usuario no esta logeado */
+          /* pantalla inicial cuando el usuario no esta logeado */
           <div className="fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(244,114,182,0.22)_0%,transparent_40%),radial-gradient(circle_at_80%_10%,rgba(236,72,153,0.25)_0%,transparent_42%),radial-gradient(circle_at_70%_80%,rgba(217,70,239,0.2)_0%,transparent_45%)]" />
             <div className="absolute -top-24 right-0 h-80 w-80 rounded-full bg-pink-400/20 blur-3xl animate-pulse" />
@@ -79,16 +97,15 @@ const App = () => {
 
               <button
                 type="button"
-                onClick={() =>
-                  googleOneTap(
-                    { client_id: "370998042099-oqk1snni2bvvnhr1517p9if58e28fej7.apps.googleusercontent.com" },
-                    (response) => login(response)
-                  )
-                }
+                onClick={promptOneTap}
                 className="group inline-flex items-center gap-3 rounded-full bg-black text-white dark:bg-white dark:text-black px-7 py-3.5 text-base md:text-lg font-bold shadow-xl hover:scale-[1.02] active:scale-100 transition"
               >
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white text-black dark:bg-black dark:text-white text-sm font-extrabold">
-                  G
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white dark:bg-black">
+                  <img
+                    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                    alt="Google"
+                    className="h-4 w-4"
+                  />
                 </span>
                 Continuar con Google
               </button>
