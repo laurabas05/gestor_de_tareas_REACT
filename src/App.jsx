@@ -92,21 +92,19 @@ const App = () => {
                 </span>
               </h2>
               <p className="text-stone-700 dark:text-stone-300 text-lg md:text-2xl mb-8 max-w-2xl mx-auto">
-                Organiza tu día, mantiene foco y completa tareas sin fricción.
+                Crea, organiza y termina tareas.
               </p>
 
               <button
                 type="button"
                 onClick={promptOneTap}
-                className="group inline-flex items-center gap-3 rounded-full bg-black text-white dark:bg-white dark:text-black px-7 py-3.5 text-base md:text-lg font-bold shadow-xl hover:scale-[1.02] active:scale-100 transition"
+                className="group inline-flex items-center gap-3 rounded-full bg-white text-black dark:bg-black dark:text-white px-7 py-3.5 text-base md:text-lg font-bold shadow-xl hover:scale-[1.02] active:scale-100 transition"
               >
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white dark:bg-black">
-                  <img
-                    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-                    alt="Google"
-                    className="h-4 w-4"
-                  />
-                </span>
+                <img
+                  src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                  alt="Google"
+                  className="h-5 w-5"
+                />
                 Continuar con Google
               </button>
 

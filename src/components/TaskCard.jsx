@@ -1,4 +1,5 @@
 import { useTasks } from "../context/TaskContext"
+import { MdArrowBack, MdArrowForward, MdCheck, MdDelete } from "react-icons/md"
 
 // colores para cada prioridad
 const colors = {
@@ -36,20 +37,28 @@ const TaskCard = ({ task }) => {
                     que es siempre estático */}
                     {task.status !== "todo" && (
                         <button onClick={() => moveTask(task.id, "todo")}
-                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">⬅️</button>
+                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">
+                            <MdArrowBack size={18} />
+                        </button>
                     )}
 
                     {task.status === "todo" && (
                         <button onClick={() => moveTask(task.id, "progress")}
-                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">➡️</button>
+                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">
+                            <MdArrowForward size={18} />
+                        </button>
                     )}
 
                     {task.status === "progress" && (
                         <button onClick={() => moveTask(task.id, "done")}
-                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">✅</button>
+                            className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">
+                            <MdCheck size={18} />
+                        </button>
                     )}
                     <button onClick={() => deleteTask(task.id)}
-                        className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">Eliminar</button>
+                        className="dark:bg-gray-500/50 bg-pink-200 py-1 px-3 rounded-full shadow transition-transform duration-300 hover:-translate-y-1">
+                        <MdDelete size={18} />
+                    </button>
                 </div>
             </div>
         </div>
